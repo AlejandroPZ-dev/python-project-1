@@ -49,7 +49,7 @@ def py0014():
         print(f"La media ponderada es: {media:.2f}")
 
     except ValueError:
-        print("⚠️ Error: debes introducir valores numéricos válidos.")
+        print("Error: debes introducir valores numéricos válidos.")
 
 
 def py0020():
@@ -167,10 +167,83 @@ def py0003():
     print("\n--- Lista Final ---")
     print(f"Lista final de asistentes: {asistentes}")
 
+def py0004():
+
+    menu = ["Ensalada","sopa","pasta"]
+    menu_hoy = menu.copy()
+    menu_hoy.append("Pescado")
+    menu_hoy.append("Postre")
+    menu_hoy.pop(len(menu_hoy)-1)
+    if "sopa" in menu_hoy:
+        menu_hoy.remove("sopa")
+    else:
+        print("El valor sopa no esta en la lista.")
+    menu.pop(2)
+    print(menu.reverse())
+    menu.clear()
+    print("lista menu: " + str(menu))
+    print("\nlista menu_hoy: " + str(menu_hoy))
+
+def py0025():
+    ejecuciones = 0
+    paises = ["Espania","Argentina","Peru"]
+
+    while True:
+        ejecuciones += 1
+        exito = True
+        try:
+
+            opcion = int(input("""MENÚ. Elija una de las siguientes opciones marcando su número:
+              1. Imprimir alfabéticamente en orden ascendente
+              2. Imprimir alfabéticamente en orden descendente
+              3. Añadir País
+              4. Eliminar Pais
+              5. Salir"""))
+        except ValueError:
+            print("Debes introducir un numero entero\n")
+            continue
+        else:
+            if opcion <1 or opcion >5:
+                print("La opcion debe de estar entre 1 y 5\n")
+                continue
+            match opcion:
+                case 1:
+                    print(str(sorted(paises)))
+                case 2:
+                    print(sorted(paises, reverse=True))
+                case 3:
+                    nuevo = input("Introduce el país a añadir: ").strip()
+                    if nuevo == "":
+                        print("No se puede añadir un país vacío.\n")
+                        exito = False
+                    else:
+                        nuevo = nuevo.capitalize()
+                        if nuevo in paises:
+                            print("Ese país ya está en la lista.\n")
+                            exito = False
+                        else:
+                            paises.append(nuevo)
+                            print(f"'{nuevo}' añadido correctamente.\n")
+                            print(paises, "\n")
+                case 4:
+                    borrar = input("Introducir el país a borrar: ").strip().capitalize()
+                    if borrar in paises:
+                        paises.remove(borrar)
+                    else:
+                        print("El pais no esta en la lista.\n")
+                        exito = False
+                case 5:
+                    print("Hasta luego!")
+                    break
+            if exito and opcion !=5:
+                print(70*"#"+"\n\n")
+
+
+
 
 
 
 # --- Punto de entrada ---
 if __name__ == "__main__":
-    py0003()
+    py0025()
 
